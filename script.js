@@ -1,5 +1,9 @@
 'use strict'
 
+
+let computerSelection = null;
+let playerSelection = null;
+
 function getComputerChoice(){
     let randomNumber = Math.floor(Math.random()*3);
     if(randomNumber === 0){
@@ -13,24 +17,33 @@ function getComputerChoice(){
     }
 }
 
-let computerSelection = getComputerChoice();
+function game(){
 
-function playRound(playerSelection, computerSelection){
-    if(playerSelection === 'Rock' && computerSelection === 'Scissor'){
-        return `You Win! ${playerSelection} beats ${computerSelection}`;
+    computerSelection = getComputerChoice();
+    playerSelection = prompt('Input your choice!');
+    playRound(playerSelection, computerSelection);
+    
+    function playRound(playerSelection, computerSelection){
+        if(playerSelection.toLowerCase() === 'Rock'.toLowerCase() && computerSelection.toLowerCase() === 'Scissor'.toLowerCase()){
+            return `You Win! ${playerSelection} beats ${computerSelection}`;
+        }
+        else if(playerSelection.toLowerCase() === 'Paper'.toLowerCase() && computerSelection.toLowerCase() === 'Rock'.toLowerCase()){
+            return `You Win! ${playerSelection} beats ${computerSelection}`;
+        }
+        else if(playerSelection.toLowerCase() === 'Scissor'.toLowerCase() && computerSelection.toLowerCase() === 'Paper'.toLowerCase()){
+            return `You Win! ${playerSelection} beats ${computerSelection}`;
+        }
+        else if(playerSelection.toLowerCase() === computerSelection.toLowerCase()){
+            return "Tie";
+        }
+        else{
+            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+        }
     }
-    else if(playerSelection === 'Paper' && computerSelection === 'Rock'){
-        return `You Win! ${playerSelection} beats ${computerSelection}`;
-    }
-    else if(playerSelection === 'Scissor' && computerSelection === 'Paper'){
-        return `You Win! ${playerSelection} beats ${computerSelection}`;
-    }
-    else if(playerSelection === computerSelection){
-        return "Tie";
-    }
-    else{
-        return `You Lose! ${playerSelection} beats ${computerSelection}`;
-    }
+    console.log(playRound(playerSelection, computerSelection));
+
 }
+game();
 
-//console.log(getComputerChoice());
+
+//console.log(game(), computerSelection, playerSelection);
